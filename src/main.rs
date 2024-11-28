@@ -2,6 +2,7 @@ use axum::response::Html;
 use tokio::net::TcpListener;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+// [ ] Create a HTML page that displays all of the JS dependencies' version
 #[tokio::main]
 async fn main() {
     // Initialise logging
