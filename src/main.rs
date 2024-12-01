@@ -1,10 +1,8 @@
-use axum::response::Html;
-use tokio::net::TcpListener;
+use axum_htmx_sandbox::http;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-// [ ] Create a HTML page that displays all of the JS dependencies' version
 #[tokio::main]
-async fn main() {
+async fn main() -> anyhow::Result<()> {
     // Initialise logging
         tracing_subscriber::registry()
         .with(
@@ -21,11 +19,8 @@ async fn main() {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
-    let listener = TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    tracing::debug!("listening on {}", listener.local_addr().unwrap());
-    println!("Hello, world!");
+    http::serve().await?;
+
+    Ok(())
 }
 
-async fn index() -> Html<&'static str> {
-    Html("<h1>heehee</h1>")   
-}
