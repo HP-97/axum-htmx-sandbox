@@ -5,11 +5,13 @@ use axum::Router;
 use axum_embed::ServeEmbed;
 use minijinja::Environment;
 use rust_embed::Embed;
+use tower_http::compression::CompressionLayer;
 
 pub mod error;
 pub mod forms;
 pub mod healthcheck;
 pub mod index;
+pub mod spin;
 
 #[derive(Embed, Clone)]
 #[folder = "assets/"]
@@ -28,7 +30,7 @@ pub type Result<T, E = error::Error> = std::result::Result<T, E>;
 
 /// TODO: Ensure http port is configurable 
 pub async fn serve() -> anyhow::Result<()> {
-    let ip = "0.0.0.0:8080";
+    let ip = "0.0.0.0:8081";
 
     let app = full_router();
 
@@ -38,11 +40,16 @@ pub async fn serve() -> anyhow::Result<()> {
 }
 
 fn full_router() -> Router {
+    let compression_layer = CompressionLayer::new()
+        .br(true)
+        .gzip(true);
+
     let app = Router::new()
         .merge(index::router())
         .merge(healthcheck::router())
         .merge(forms::router())
-        .merge(using_serve_dir());
+        .merge(using_serve_dir())
+        .layer(compression_layer);
 
     app
 }
