@@ -3,31 +3,12 @@
 {% block head %}{{ super() }}{% endblock %}
 {% block content %}
 <h1 class="text-3xl">Health Check</h1>
-<div>
+<div x-data="{ htmlVersion: htmx.version, alpineVersion: Alpine.version }">
   <div id="htmx-version">
-    Grabbing htmx version ... 
+    htmx version = <strong x-text="htmlVersion"></strong>
   </div>
   <div id="alpine-version">
-    Grabbing alpine version ...
+    Alpine.js version = <strong x-text="alpineVersion"></strong>
   </div>
 </div>
-<script>
-  window.onload = (event) => {
-    // Update the htmx version
-    let htmxVersion = "";
-    let htmxDOM = document.getElementById("htmx-version");
-    try {
-      htmxVersion = htmx.version;
-      htmxDOM.innerHTML = `htmx version = ${htmxVersion}`;
-    } catch (e) {
-      htmxDOM.innerHTML = `ERROR: Failed to retrieve htmx version = ${e.message}`;
-    }
-
-    // TODO Handle case where Alpine fails
-    // Update the Alpine version
-    const alpineVersion = Alpine.version;
-    let alpineDOM = document.getElementById("alpine-version");
-    alpineDOM.innerHTML = `Alpine version = ${alpineVersion}`;
-  }
-</script>
 {% endblock %}
