@@ -4,8 +4,7 @@ use minijinja::context;
 use super::ENV;
 
 pub fn router() -> Router {
-    Router::new()
-        .route("/", get(index))
+    Router::new().route("/", get(index))
 }
 
 pub async fn index() -> Html<String> {
@@ -13,4 +12,3 @@ pub async fn index() -> Html<String> {
     let ctx = context!();
     Html(tmpl.render(ctx).unwrap())
 }
-
