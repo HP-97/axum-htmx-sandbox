@@ -11,4 +11,9 @@
     Alpine.js version = <strong x-text="alpineVersion"></strong>
   </div>
 </div>
+<script>
+  document.body.addEventListener("init", function(evt) {
+    console.log("hey from healthcheck.html!");
+  }, {once: true})
+</script>
 {% endblock %}

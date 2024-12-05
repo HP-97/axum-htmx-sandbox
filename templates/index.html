@@ -10,5 +10,24 @@
     <a href="/healthcheck">Health Check</a>
     <a href="/forms/basic">Basic Form</a>
   </div>
+  <div>
+    <select class="test-basic-single">
+      <option value="hamburger">Hamburger</option>
+      <option value="steak">Steak</option>
+    </select>
+  </div>
+  <script>
+    window.onload = function() {
+      init();
+    }
+    
+    document.body.addEventListener("init", function(evt) {
+      init();
+    }, {once:true})
+    function init() {
+      console.log("I ran!");
+      $('.test-basic-single').select2();
+    }
+  </script>
 {% endblock %}
 

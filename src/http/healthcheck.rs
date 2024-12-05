@@ -2,10 +2,7 @@
 //!
 
 use axum::{
-    http::{
-        header,
-        HeaderValue,
-    },
+    http::{header, HeaderValue},
     response::{IntoResponse, Redirect},
     routing::get,
     Router,
@@ -36,6 +33,8 @@ pub async fn index() -> impl IntoResponse {
     let tmpl = ENV.get_template("healthcheck.html").unwrap();
     let ctx = context!();
 
-    // ([("Hx-Trigger-After-Settle", "doHealthCheck")], tmpl.render(ctx).unwrap())
-    tmpl.render(ctx).unwrap()
+    (
+        [("Hx-Trigger-After-Swap", "init")],
+        tmpl.render(ctx).unwrap(),
+    )
 }
