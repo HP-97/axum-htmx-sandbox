@@ -7,14 +7,15 @@
   <h1 class="text-3xl">Index</h1>
   <div>
     Welcome!
-    <a href="/healthcheck">Health Check</a>
-    <a href="/forms/basic">Basic Form</a>
   </div>
   <div>
     <select class="test-basic-single">
       <option value="hamburger">Hamburger</option>
       <option value="steak">Steak</option>
     </select>
+  </div>
+  <div x-data="{ username: 'hoapham' }">
+    <div x-text="`my username is ${username}`"></div>
   </div>
   <script>
     window.onload = function() {

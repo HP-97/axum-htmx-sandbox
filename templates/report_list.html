@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+
+<div x-data="{ rn_test: $persist('test123'), date: '' }">
+  <div x-data="{ date: '' }" x-init="date = new Date()" x-text="date"></div>
+  <input type="text" x-model="rn_test">
+  <!-- <button @click="clearLocalStorageWithPrefix('rn_'); $el.replaceWith($el.cloneNode(true))">Reset all rn_ vars</button> -->
+  <!-- <button @click="$el.replaceWith($el.cloneNode(true))">Reset all rn_ vars</button> -->
+  <button @click="
+    clearLocalStorageWithPrefix('rn_')
+    $root.replaceWith($root.cloneNode(true))">Reset form</button>
+  <!-- <button @click="console.log($el.cloneNode(true))">Reset all rn_ vars</button> -->
+</div>
+
+<script>
+  function clearLocalStorageWithPrefix(prefix) {
+    Object.keys(localStorage)
+      // The '_x_' prefix is required because Alpine.js automatically prefixes
+      // all persisted variables with this value.
+      // reference: https://alpinejs.dev/plugins/persist#how-it-works
+      .filter(x => x.startsWith(`_x_${prefix}`))
+      .forEach(x => localStorage.removeItem(x))
+  }
+</script>
+{% endblock %}
