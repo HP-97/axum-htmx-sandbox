@@ -11,6 +11,7 @@ pub mod error;
 pub mod forms;
 pub mod healthcheck;
 pub mod index;
+pub mod reports;
 pub mod spin;
 
 #[derive(Embed, Clone)]
@@ -47,6 +48,7 @@ fn full_router() -> Router {
         .merge(index::router())
         .merge(healthcheck::router())
         .merge(forms::router())
+        .merge(reports::router())
         .merge(using_serve_dir())
         .layer(compression_layer);
 
