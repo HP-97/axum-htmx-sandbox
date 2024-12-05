@@ -3,6 +3,7 @@
   <head>
     {% block head -%}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
     <meta
       name="description"
       content="A simple static website built using Axum and HTMX"
@@ -11,8 +12,11 @@
     <!-- The question mark is there to ensure the latest favicon icon is used -->
     <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
     <link rel="stylesheet" href="/assets/output.css" />
+    <link rel="stylesheet" href="/assets/select2.min.css" />
     <script defer src="/assets/htmx.min.js"></script>
     <script defer src="/assets/alpinejs.min.js"></script>
+    <script defer src="/assets/jquery-3.7.1.slim.min.js"></script>
+    <script defer src="/assets/select2.min.js"></script>
     {%- endblock %}
   </head>
   <body>
